@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments :: head"></head>
+<body>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<h1>Find out when the ISS will be visible.</h1>
+
+<form action="/search" method="post" th:object="${address}">
+    <p>
+        <label th:for="streetNumber">Street Number</label>
+        <input th:field="*{streetNumber}"/>
+        <span th:errors="*{streetNumber}"></span>
+    </p>
+    <p>
+        <label th:for="street">Street</label>
+        <input th:field="*{street}"/>
+        <span th:errors="*{street}"></span>
+    </p>
+    <p>
+        <label th:for="city">City</label>
+        <input th:field="*{city}"/>
+        <span th:errors="*{city}"></span>
+    </p>
+    <p>
+        <label th:for="state">State</label>
+        <input th:field="*{state}"/>
+        <span th:errors="*{state}"></span>
+    </p>
+    <button type="submit">Search</button>
+</form>
+
+<form action="/search" method="delete">
+
+    <div th:each="search : ${seaches}">
+        <input type="checkbox" name="searchId" th:value="${search.searchId}" th:id="${search.searchId}"/>
+        <label th:for="${search.searchId}" th:text="${search.address}"></label>
+        <p th:text="${search.time}"></p>
+        <br />
+    </div>
+
+    <input type="submit" value="Remove Cheese" />
+</form>
+</body>
+</html>

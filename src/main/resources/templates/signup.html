@@ -5,16 +5,23 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<form action="/login" method="post" th:object="${user}">
+<form action="/signup" method="post" th:object="${user}">
     <p>
         <label th:for="username">Username</label>
         <input th:field="*{username}"/>
         <span th:errors="*{username}"></span>
+        <span th:text="${userError}"></span>
     </p>
     <p>
         <label th:for="password">Password</label>
         <input th:field="*{password}"/>
         <span th:errors="*{password}"></span>
+    </p>
+    <p>
+        <label th:for="verifyPassword">Verify Password</label>
+        <input th:field="*{verifyPassword}"/>
+        <span th:errors="*{password}"></span>
+        <span th:text="${passwordError}"></span>
     </p>
     <button type="submit">Log in</button>
 </form>

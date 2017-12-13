@@ -1,29 +1,24 @@
 package com.example.spacestation.models;
 
+import com.example.spacestation.models.data.SearchDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 
-@Service
 public class SearchService {
 
-    @Autowired
-    private SearchRepository searchRepository;
+    public ArrayList<Search> getAllSearches(User user, SearchDao searchDao) { return searchDao.findByUser(user); }
 
-    public ArrayList<Search> getAllSearches(String username) {
-        return searchRepository.findByUsername(username);
+    public Search getSearch(Integer searchId, SearchDao searchDao) {
+        return searchDao.findOne(searchId);
     }
 
-    public Search getSearch(Integer searchId) {
-        return searchRepository.findOne(searchId);
+    public void addSearch(Search search, SearchDao searchDao) {
+        searchDao.save(search);
     }
 
-    public void addSearch(Search search) {
-        searchRepository.save(search);
+    public void deleteSearch(Integer searchId, SearchDao searchDao) {
+        searchDao.delete(searchId);
     }
 
-    public void deleteSearch(Integer searchId) {
-        searchRepository.delete(searchId);
-    }
+
 }

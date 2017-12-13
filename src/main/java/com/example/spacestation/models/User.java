@@ -1,11 +1,10 @@
 package com.example.spacestation.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,15 +12,23 @@ import java.util.regex.Pattern;
 public class User {
 
     @Id
+    @GeneratedValue
+    private int id;
     @NotNull
     @Size(min = 3, max = 15)
     private String username;
     @NotNull
     @Size(min = 3, max = 15)
     private String password;
-    private String phrase;
+    @Transient
+    private String verifyPassword;
     @OneToMany
-    private ArrayList<Integer> searchIds;
+    @JoinColumn(name = "search_id")
+    private List<Search> searches = new ArrayList<>();
+
+    public User() {}
+
+    public int getId() { return id; }
 
     public String getUsername() {
         return username;
@@ -39,27 +46,9 @@ public class User {
         this.password = password;
     }
 
-    public ArrayList<Integer> getSearchIds() {
-        return searchIds;
-    }
+    public String getVerifyPassword() { return verifyPassword; }
 
-    public void setSearchIds(ArrayList<Integer> searchIds) {
-        this.searchIds = searchIds;
-    }
+    public void setVerifyPassword(String verifyPassword) { this.verifyPassword = verifyPassword; }
 
-    public String getPhrase() { return phrase; }
 
-    public void setPhrase(String phrase) { this.phrase = phrase; }
-
-    public static boolean validateUsername(User user) {
-        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-        Matcher m = p.matcher(user.getUsername());
-        boolean containsSpecial = m.find();
-
-        if (containsSpecial) {
-            return false;
-        } else {
-            return true;
-        }
-    }
 }

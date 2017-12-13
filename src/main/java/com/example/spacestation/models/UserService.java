@@ -1,53 +1,38 @@
 package com.example.spacestation.models;
 
+import com.example.spacestation.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    public User getUser(String username) {
-        return userRepository.findOne(username);
+    public User getUser(String username, UserDao userDao) {
+        return userDao.findByUsername(username);
     }
 
-    public boolean updateUser(String username, String password, String phrase) {
+    public boolean addUser(User user, UserDao userDao) {
 
-        if (userRepository.exists(username)) {
-            User user = userRepository.findByUsername(username);
-            if (user.getPhrase().equals(phrase)) {
-                user.setPassword(password);
-                userRepository.save(user);
-                return true;
-            } else{
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    public boolean addUser(User user) {
-
-        if(userRepository.exists(user.getUsername())) {
+        if(userDao.findByUsername(user.getUsername()) != null) {
             return false;
         } else {
-            userRepository.save(user);
+            userDao.save(user);
             return true;
         }
     }
 
-    public boolean loginUser(User user) {
-        if (userRepository.findOne(user.getUsername()).equals(user)) {
+    public boolean loginUser(User user, UserDao userDao) {
+        User existingUser = userDao.findByUsername(user.getUsername());
+        if (existingUser.getPassword().equals(user.getPassword())) {
             return true;
         } else {
             return false;
         }
     }
 
-    public void updatePassword(User user) {
-
+    public  boolean checkPassword(User user) {
+        if (user.getPassword().equals(user.getVerifyPassword())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

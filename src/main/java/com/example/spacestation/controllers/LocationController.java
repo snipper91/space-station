@@ -14,11 +14,11 @@ public class LocationController {
     @RequestMapping(value = "/location", method = RequestMethod.GET)
     public String location(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        if (session.getAttribute("userSession") != null) {
+        if (session.getAttribute("username") != null) {
             //TODO get information from ISS api fro current position
             return "location";
         } else {
-            return "redirect: /login";
+            return "redirect:/login";
         }
     }
 }
