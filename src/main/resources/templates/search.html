@@ -30,17 +30,19 @@
     </p>
     <button type="submit">Search</button>
 </form>
+<br/>
+<br/>
 
-<form action="/search" method="delete">
+<form action="/search/delete" method="post">
 
-    <div th:each="search : ${seaches}">
-        <input type="checkbox" name="searchId" th:value="${search.searchId}" th:id="${search.searchId}"/>
-        <label th:for="${search.searchId}" th:text="${search.address}"></label>
+    <div th:each="search : ${searches}">
+        <input type="checkbox" name="Id" th:value="${search.Id}" th:id="${search.Id}"/>
+        <label th:for="${search.Id}" th:text="${search.address}"></label>
         <p th:text="${search.time}"></p>
         <br />
     </div>
 
-    <input type="submit" value="Remove Cheese" />
+    <input type="submit" value="Remove Search" />
 </form>
 </body>
 </html>

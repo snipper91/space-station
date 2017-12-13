@@ -42,7 +42,7 @@ public class Search {
 
     public void setAddress(Address address) {
 
-        this.address = address.getStreetNumber() + " " + address.getStreet() + " " + address.getState();
+        this.address = address.getStreetNumber() + " " + address.getStreet() + " " + address.getCity() + " " + address.getState();
     }
 
     public void setUser(User user) {

@@ -7,5 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.ArrayList;
 
 public interface SearchDao extends CrudRepository<Search, Integer> {
-    ArrayList<Search> findByUser(User user);
+    ArrayList<Search> findByUserId(int userId);
 }
