@@ -24,5 +24,11 @@ public class SearchService {
         searchDao.delete(searchId);
     }
 
+    public void deleteMultiple(ArrayList<Integer> ids, SearchDao searchDao) {
+        for(int id : ids) {
+            searchDao.delete(id);
+        }
+    }
+
 
 }

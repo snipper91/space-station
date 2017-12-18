@@ -16,10 +16,13 @@ public class URLConnection {
     private static final String USER_AGENT = "Mozilla/5.0";
     private final String GOOGLE_KEY = "AIzaSyCmEoMk6KpWJUT11v3aJ171eE_QCYXEpmQ";
     private final String GOOGLE_URL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+    private String addressURL;
 
     public URLConnection(Address address) {
         this.address = address.toString();
     }
+
+    public URLConnection(String addressURL) { this.addressURL = addressURL; }
 
     public String getTime() {
         java.util.Date risetimeReadable = new java.util.Date(riseTime*1000);
@@ -74,6 +77,48 @@ public class URLConnection {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public void updatedSearch() throws IOException {
+        URL obj = new URL(GOOGLE_URL + addressURL + "&key=" + GOOGLE_KEY);
+        HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
+        connection.setRequestMethod("GET");
+        connection.setRequestProperty("User-Agent", USER_AGENT);
+        int responseCode = connection.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            JSONObject jsonObject = new JSONObject(response.toString());
+            this.location = jsonObject.getJSONArray("results").getJSONObject(0)
+                    .getJSONObject("geometry").getJSONObject("location");
+
+        }
+        String issUrl = "http://api.open-notify.org/iss-pass.json?lat="
+                + location.getDouble("lat") + "&lon=" + location.getDouble("lng");
+        URL object = new URL(issUrl);
+        HttpURLConnection connectionURL = (HttpURLConnection) object.openConnection();
+        connectionURL.setRequestMethod("GET");
+        connectionURL.setRequestProperty("User-Agent", USER_AGENT);
+        responseCode = connectionURL.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+
+            BufferedReader inSecond = new BufferedReader(new InputStreamReader(connectionURL.getInputStream()));
+            String inputLine;
+            StringBuffer responseSecond = new StringBuffer();
+            while ((inputLine = inSecond.readLine()) != null) {
+                responseSecond.append(inputLine);
+            }
+            inSecond.close();
+            JSONObject jsonObject = new JSONObject(responseSecond.toString());
+            this.duration = jsonObject.getJSONArray("response").getJSONObject(0).getLong("duration");
+            this.riseTime = jsonObject.getJSONArray("response").getJSONObject(0).getLong("risetime");
         }
     }
 }

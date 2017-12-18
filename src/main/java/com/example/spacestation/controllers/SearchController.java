@@ -48,8 +48,6 @@ public class SearchController {
         if (session.getAttribute("username") != null) {
             SearchService searchService = new SearchService();
             URLConnection urlConnection = new URLConnection(address);
-            ArrayList<Search> searches = searchService.getByUsername(session.getAttribute("username").toString(), searchDao, userDao);
-            model.addAttribute("searches", searches);
             try {
                 boolean isGoogleRequest = urlConnection.googleRequest();
 
@@ -64,6 +62,8 @@ public class SearchController {
                         search.setUser(userService.getUser(session.getAttribute("username").toString(), userDao));
                         searchService.addSearch(search, searchDao);
                         model.addAttribute(new Address());
+                        ArrayList<Search> searches = searchService.getByUsername(session.getAttribute("username").toString(), searchDao, userDao);
+                        model.addAttribute("searches", searches);
                         return "search";
                     } else {
                         model.addAttribute("error", "Something went wrong with the ISS connection.");
@@ -86,6 +86,26 @@ public class SearchController {
         if (session.getAttribute("username") != null) {
             SearchService searchService = new SearchService();
             searchService.deleteSearch(Id, searchDao);
+            return "redirect:/search";
+        } else {
+            return "redirect:/login";
+        }
+    }
+
+    @RequestMapping(value = "/search/update", method = RequestMethod.POST)
+    public String updateSearch(HttpServletRequest request, @RequestParam int Id) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("username") != null) {
+            SearchService searchService = new SearchService();
+            Search search = searchService.getSearch(Id, searchDao);
+            URLConnection urlConnection = new URLConnection(search.getAddressURL());
+            try {
+                urlConnection.updatedSearch();
+            } catch (IOException ie) {
+                ie.printStackTrace();
+            }
+            search.setTime(urlConnection.getTime());
+            searchService.addSearch(search, searchDao);
             return "redirect:/search";
         } else {
             return "redirect:/login";

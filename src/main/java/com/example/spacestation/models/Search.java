@@ -45,6 +45,10 @@ public class Search {
         this.address = address.getStreetNumber() + " " + address.getStreet() + " " + address.getCity() + " " + address.getState();
     }
 
+    public String getAddressURL() {
+        return address.replaceAll(" ", "+");
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
