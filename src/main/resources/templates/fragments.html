@@ -3,6 +3,14 @@
 <head th:fragment="head">
     <meta charset="UTF-8"/>
     <title th:text="${title}"> </title>
+    <style>
+        body {
+            margin-left: 50px;
+            background-color: #c0d6e4;
+            color: #130d65;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -11,7 +19,7 @@
     <a href="/login">Login</a>
     <a href="/signup">Sign Up</a>
     <a href="/search">Search</a>
-    <a href="/logout" methods="post">Logout</a>
+    <a href="/logout">Logout</a>
 </nav>
 
 </body>

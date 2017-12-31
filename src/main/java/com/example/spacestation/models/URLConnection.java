@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class URLConnection {
@@ -17,12 +20,17 @@ public class URLConnection {
     private final String GOOGLE_KEY = "AIzaSyCmEoMk6KpWJUT11v3aJ171eE_QCYXEpmQ";
     private final String GOOGLE_URL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
     private String addressURL;
+    private final String LOCATION_URL = "http://api.open-notify.org/iss-now.json";
+    private final String GOOGLE_REVERSE_URL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
+    private JSONObject currentCoordinates;
 
     public URLConnection(Address address) {
         this.address = address.toString();
     }
 
     public URLConnection(String addressURL) { this.addressURL = addressURL; }
+
+    public URLConnection() {}
 
     public String getTime() {
         java.util.Date risetimeReadable = new java.util.Date(riseTime*1000);
@@ -120,5 +128,25 @@ public class URLConnection {
             this.duration = jsonObject.getJSONArray("response").getJSONObject(0).getLong("duration");
             this.riseTime = jsonObject.getJSONArray("response").getJSONObject(0).getLong("risetime");
         }
+    }
+
+    public String getCurrentLocation() throws IOException {
+        URL obj = new URL(LOCATION_URL);
+        HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
+        connection.setRequestMethod("GET");
+        connection.setRequestProperty("User-Agent", USER_AGENT);
+        int responseCode = connection.getResponseCode();
+        if(responseCode == HttpURLConnection.HTTP_OK) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+            while((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            JSONObject jsonObject = new JSONObject(response.toString());
+            currentCoordinates = jsonObject.getJSONObject("iss_position");
+        }
+        return currentCoordinates.getString("latitude") + "," + currentCoordinates.getString("longitude");
     }
 }
