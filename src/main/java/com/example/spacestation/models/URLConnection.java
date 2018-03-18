@@ -21,7 +21,6 @@ public class URLConnection {
     private final String GOOGLE_URL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
     private String addressURL;
     private final String LOCATION_URL = "http://api.open-notify.org/iss-now.json";
-    private final String GOOGLE_REVERSE_URL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
     private JSONObject currentCoordinates;
 
     public URLConnection(Address address) {
@@ -46,14 +45,8 @@ public class URLConnection {
         int responseCode = connection.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-            JSONObject jsonObject = new JSONObject(response.toString());
+            String response = readResponse(connection);
+            JSONObject jsonObject = new JSONObject(response);
             this.location = jsonObject.getJSONArray("results").getJSONObject(0)
                     .getJSONObject("geometry").getJSONObject("location");
             return true;
@@ -72,14 +65,8 @@ public class URLConnection {
         int responseCode = connection.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-            JSONObject jsonObject = new JSONObject(response.toString());
+            String response = readResponse(connection);
+            JSONObject jsonObject = new JSONObject(response);
             this.duration = jsonObject.getJSONArray("response").getJSONObject(0).getLong("duration");
             this.riseTime = jsonObject.getJSONArray("response").getJSONObject(0).getLong("risetime");
             return true;
@@ -96,14 +83,8 @@ public class URLConnection {
         int responseCode = connection.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-            JSONObject jsonObject = new JSONObject(response.toString());
+            String response = readResponse(connection);
+            JSONObject jsonObject = new JSONObject(response);
             this.location = jsonObject.getJSONArray("results").getJSONObject(0)
                     .getJSONObject("geometry").getJSONObject("location");
 
@@ -137,16 +118,26 @@ public class URLConnection {
         connection.setRequestProperty("User-Agent", USER_AGENT);
         int responseCode = connection.getResponseCode();
         if(responseCode == HttpURLConnection.HTTP_OK) {
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-            while((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-            JSONObject jsonObject = new JSONObject(response.toString());
+            String response = readResponse(connection);
+            JSONObject jsonObject = new JSONObject(response);
             currentCoordinates = jsonObject.getJSONObject("iss_position");
         }
         return currentCoordinates.getString("latitude") + "," + currentCoordinates.getString("longitude");
+    }
+
+    private String readResponse(HttpURLConnection connection) {
+        StringBuffer response = new StringBuffer();
+        try {
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return response.toString();
     }
 }

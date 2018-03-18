@@ -16,7 +16,7 @@ public class HomeController {
     public String index(Model model, HttpServletRequest request) {
 
         URLConnection urlConnection = new URLConnection();
-        
+
         try {
             String currentLocation = "The current position of the ISS is " + urlConnection.getCurrentLocation() + ".";
             model.addAttribute("location", currentLocation);
