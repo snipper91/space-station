@@ -27,6 +27,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(Model model, @ModelAttribute User user, HttpServletRequest request) {
         UserService userService = new UserService();
+
         if (userService.loginUser(user, userDao)) {
             request.getSession().setAttribute("username", user.getUsername());
             return "redirect:/";
