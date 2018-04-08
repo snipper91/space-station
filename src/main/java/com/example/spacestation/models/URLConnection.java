@@ -33,7 +33,7 @@ public class URLConnection {
 
     public String getTime() {
         java.util.Date risetimeReadable = new java.util.Date(riseTime*1000);
-        String time = "The ISS will rise at " + risetimeReadable + " and be visible for " + duration + " seconds.";
+        String time = "The ISS will rise " + risetimeReadable + " and be visible for " + duration + " seconds.";
         return time;
     }
 
@@ -135,7 +135,7 @@ public class URLConnection {
             }
             in.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Failed to read input.");
         }
 
         return response.toString();

@@ -26,35 +26,40 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-6">
-            <form action="/signup" method="post" th:object="${user}">
-                <div style="text-align: right">
-                    <label th:for="username">Username</label>
-                    <input th:field="*{username}"/>
-                    <span th:errors="*{username}"></span>
-                    <span th:text="${userError}"></span>
-                </div>
-                <div style="text-align: right">
-                    <label th:for="password">Password</label>
-                    <input th:field="*{password}" type="password"/>
-                    <span th:errors="*{password}"></span>
-                </div>
-                <div style="text-align: right">
-                    <label th:for="verifyPassword">Verify Password</label>
-                    <input th:field="*{verifyPassword}" type="password"/>
-                    <span th:errors="*{password}"></span>
-                    <span th:text="${passwordError}"></span>
-                </div>
-                <div style="text-align: right">
-                    <button class="btn btn-default" type="submit">Signup</button>
-                </div>
-            </form>
+        <div class="col-4">
+
         </div>
-        <div class="col-6">
+        <div class="col-4">
+            <div class="card">
+                <form action="/signup" method="post" th:object="${user}">
+                    <div style="text-align: right">
+                        <label th:for="username">Username:</label>
+                        <input th:field="*{username}"/>
+                        <span th:errors="*{username}"></span>
+                        <span th:text="${userError}"></span>
+                    </div>
+                    <div style="text-align: right">
+                        <label th:for="password">Password:</label>
+                        <input th:field="*{password}" type="password"/>
+                        <span th:errors="*{password}"></span>
+                    </div>
+                    <div style="text-align: right">
+                        <label th:for="verifyPassword">Verify Password:</label>
+                        <input th:field="*{verifyPassword}" type="password"/>
+                        <span th:errors="*{password}"></span>
+                        <span th:text="${passwordError}"></span>
+                    </div>
+                    <div style="text-align: right">
+                        <button class="btn btn-default" type="submit">Signup</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-4">
 
         </div>
     </div>
-
+    <footer th:replace="fragments :: footer"></footer>
     </body>
 </div>
 </html>

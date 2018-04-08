@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments :: head"></head>
+
+<div class="container-fluid">
+    <body>
+    <header>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="row">
+                <div class="col-3">
+                    <p class="created-by">Created by: Sean Nipper</p>
+                </div>
+                <div class="col-5">
+
+                </div>
+                <div class="col-4">
+                    <nav th:replace="fragments :: navigation"></nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <P>
+                    This is my first individual project since starting to learn web development in July 2017. As a whole
+                    this project reflects most of what I learned studying with LaunchCode and my continued studies afterwards.
+                    I'm very proud of what I've been able to accomplish in such a short time.
+                </P>
+                <p>
+                    Some of the things showcased in this project include:
+                </p>
+                <ul>
+                    <li>A back end programmed in Java utilizing the Spring Boot framework.</li>
+                    <li>URL connections that exchange and parse JSON.</li>
+                    <li>Bootstrap 4 used to arrange and style HTML elements.</li>
+                </ul>
+                <p>
+                    Future updates will include:
+                </p>
+                <ul>
+                    <li>A fully functional gallery of images taken from the ISS.</li>
+                    <li>Real time tracking of the ISS on the home page.</li>
+                    <li>Database manipulations handled from JavaScript so the page is not required to reload.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card contact-info">
+                <p>
+                    E-mail: Nipper.sean.a@gmail.com
+                </p>
+                <p>
+                    Phone: 618-980-8750
+                </p>
+            </div>
+        </div>
+    </div>
+    </body>
+</div>
+</html>

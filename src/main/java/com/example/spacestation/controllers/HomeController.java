@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
@@ -18,10 +17,10 @@ public class HomeController {
         URLConnection urlConnection = new URLConnection();
 
         try {
-            String currentLocation = "The current position of the ISS is " + urlConnection.getCurrentLocation() + ".";
+            String currentLocation = "The current position of the ISS is: " + urlConnection.getCurrentLocation() + ".";
             model.addAttribute("location", currentLocation);
         } catch (IOException ie) {
-            ie.printStackTrace();
+            System.out.println("Failed to retrieve the ISS current position.");
         }
         return "index";
     }

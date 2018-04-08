@@ -74,7 +74,7 @@ public class SearchController {
                 return "search";
                 }
             } catch (IOException ie) {
-                ie.printStackTrace();
+                System.out.println("URL connection failed.");
             }
         }
         return "redirect:/login";
@@ -102,7 +102,7 @@ public class SearchController {
             try {
                 urlConnection.updatedSearch();
             } catch (IOException ie) {
-                ie.printStackTrace();
+                System.out.println("URL connection failed.");
             }
             search.setTime(urlConnection.getTime());
             searchService.addSearch(search, searchDao);

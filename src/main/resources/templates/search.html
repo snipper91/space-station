@@ -27,49 +27,57 @@
     </div>
 
     <div class="row">
-        <div class="col-6">
-            <form action="/search" method="post" th:object="${address}">
-                <div style="text-align: right">
-                    <label th:for="streetNumber">Street Number</label>
-                    <input th:field="*{streetNumber}"/>
-                    <span th:errors="*{streetNumber}"></span>
-                </div>
-                <div style="text-align: right">
-                    <label th:for="street">Street</label>
-                    <input th:field="*{street}"/>
-                    <span th:errors="*{street}"></span>
-                </div>
-                <div style="text-align: right">
-                    <label th:for="city">City</label>
-                    <input th:field="*{city}"/>
-                    <span th:errors="*{city}"></span>
-                </div>
-                <div style="text-align: right">
-                    <label th:for="state">State</label>
-                    <input th:field="*{state}"/>
-                    <span th:errors="*{state}"></span>
-                </div>
-                <div style="text-align: right">
-                    <button class="btn btn-default" type="submit">Search</button>
-                </div>
-            </form>
+        <div class="col-4">
+            <div class="card">
+                <form action="/search" method="post" th:object="${address}">
+                    <div style="text-align: right">
+                        <label th:for="streetNumber">Street Number:</label>
+                        <input th:field="*{streetNumber}"/>
+                        <span th:errors="*{streetNumber}"></span>
+                    </div>
+                    <div style="text-align: right">
+                        <label th:for="street">Street:</label>
+                        <input th:field="*{street}"/>
+                        <span th:errors="*{street}"></span>
+                    </div>
+                    <div style="text-align: right">
+                        <label th:for="city">City:</label>
+                        <input th:field="*{city}"/>
+                        <span th:errors="*{city}"></span>
+                    </div>
+                    <div style="text-align: right">
+                        <label th:for="state">State:</label>
+                        <input th:field="*{state}"/>
+                        <span th:errors="*{state}"></span>
+                    </div>
+                    <div style="text-align: right">
+                        <button class="btn btn-default" type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-2">
+
         </div>
         <div class="col-6">
-            <form action="/search/delete" method="post">
+            <div class="card">
+                <form action="/search/delete" method="post">
 
-                <div style="text-align: center" th:each="search : ${searches}">
-                    <input type="checkbox" name="Id" th:value="${search.Id}" th:id="${search.Id}"/>
-                    <label th:for="${search.Id}" th:text="${search.address}"></label>
-                    <p th:text="${search.time}"></p>
-                    <br />
-                </div>
-                <div style="text-align: center">
-                    <button class="btn btn-danger" type="submit">Remove Search</button>
-                    <button class="btn btn-default" type="submit" formaction="/search/update">Update Search</button>
-                </div>
-            </form>
+                    <div style="text-align: center" th:each="search : ${searches}">
+                        <input type="checkbox" name="Id" th:value="${search.Id}" th:id="${search.Id}"/>
+                        <label th:for="${search.Id}" th:text="${search.address}"></label>
+                        <p th:text="${search.time}"></p>
+                        <br />
+                    </div>
+                    <div style="text-align: center">
+                        <button class="btn btn-danger" type="submit">Remove Search</button>
+                        <button class="btn btn-default" type="submit" formaction="/search/update">Update Search</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+    <footer th:replace="fragments :: footer"></footer>
     </body>
 </div>
 </html>

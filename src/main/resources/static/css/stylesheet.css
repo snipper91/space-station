@@ -27,3 +27,17 @@ img {
 label {
     color: white;
 }
+
+div.contact-info {
+    padding: 20px;
+}
+
+div.card {
+    margin: 20px;
+    padding: 20px;
+    background-color: rgb(21, 23, 25);
+}
+
+li {
+    color: white;
+}
