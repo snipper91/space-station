@@ -1,0 +1,29 @@
+body {
+    background-color: rgb(55, 59, 66);
+}
+
+h1 {
+    font-size: 36px;
+    color: white;
+    text-align: center;
+}
+
+p {
+    color: white;
+}
+
+div.jumbotron-fluid {
+    background: url(/images/stars.jpg);
+}
+
+.created-by {
+    color: white;
+}
+
+img {
+    margin: 10px;
+}
+
+label {
+    color: white;
+}

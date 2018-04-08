@@ -1,32 +1,60 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments :: head"></head>
-<body>
 
-<h1>Sign-up for the International Space Station app</h1>
+<div class="container-fluid">
+    <body>
+    <header>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="row">
+                <div class="col-3">
+                    <p class="created-by">Created by: Sean Nipper</p>
+                </div>
+                <div class="col-5">
 
-<nav th:replace="fragments :: navigation"></nav>
+                </div>
+                <div class="col-4">
+                    <nav th:replace="fragments :: navigation"></nav>
+                </div>
+            </div>
+        </div>
+    </header>
 
-<form action="/signup" method="post" th:object="${user}">
-    <p>
-        <label th:for="username">Username</label>
-        <input th:field="*{username}"/>
-        <span th:errors="*{username}"></span>
-        <span th:text="${userError}"></span>
-    </p>
-    <p>
-        <label th:for="password">Password</label>
-        <input th:field="*{password}" type="password"/>
-        <span th:errors="*{password}"></span>
-    </p>
-    <p>
-        <label th:for="verifyPassword">Verify Password</label>
-        <input th:field="*{verifyPassword}" type="password"/>
-        <span th:errors="*{password}"></span>
-        <span th:text="${passwordError}"></span>
-    </p>
-    <button type="submit">Log in</button>
-</form>
+    <div class="row">
+        <div class="col-12">
+            <h1>Sign-up for the International Space Station app</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <form action="/signup" method="post" th:object="${user}">
+                <div style="text-align: right">
+                    <label th:for="username">Username</label>
+                    <input th:field="*{username}"/>
+                    <span th:errors="*{username}"></span>
+                    <span th:text="${userError}"></span>
+                </div>
+                <div style="text-align: right">
+                    <label th:for="password">Password</label>
+                    <input th:field="*{password}" type="password"/>
+                    <span th:errors="*{password}"></span>
+                </div>
+                <div style="text-align: right">
+                    <label th:for="verifyPassword">Verify Password</label>
+                    <input th:field="*{verifyPassword}" type="password"/>
+                    <span th:errors="*{password}"></span>
+                    <span th:text="${passwordError}"></span>
+                </div>
+                <div style="text-align: right">
+                    <button class="btn btn-default" type="submit">Signup</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-6">
 
-</body>
+        </div>
+    </div>
+
+    </body>
+</div>
 </html>

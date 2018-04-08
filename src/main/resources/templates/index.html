@@ -1,20 +1,75 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments :: head"></head>
-<body>
 
-<h1>International Space Station App</h1>
+<div class="container-fluid">
+    <body>
+    <header>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="row">
+                <div class="col-3">
+                <p class="created-by">Created by: Sean Nipper</p>
+                </div>
+                <div class="col-5">
 
-<nav th:replace="fragments :: navigation"></nav>
+                </div>
+                <div class="col-4">
+                <nav th:replace="fragments :: navigation"></nav>
+                </div>
+            </div>
+        </div>
+    </header>
 
-<img src="https://www.nasa.gov/sites/default/files/iss_1.jpg" alt="ISS from space" width="331" height="258" />
-<p>Photo Credit: NASA (nasa.gov)</p>
-<p th:text="${location}"></p>
-<p>The International Space Station is a multinational research lab orbiting 220 miles above the surface of the
-Earth. By maintaining this orbiting lab scientists are able to research the effects of living in space
-on the human body, perform experiments that can only be done in zero gravity, and learn how to maintain
-a spacecraft for long periods of time. Astronauts have been living in the International Space Station
-since November 2000.</p>
+    <div class="row">
+        <div class="col=12">
+            <h1>International Space Station App</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <img class="rounded img-fluid" src="/images/iss_1.jpg" alt="ISS from space"/>
+            <p>Photo Credit: NASA (nasa.gov)</p>
+        </div>
+        <div class="col-8">
+            <p>The International Space Station is a multinational research lab orbiting 220 miles above the surface of the
+            Earth. By maintaining this orbiting lab scientists are able to research the effects of living in space
+            on the human body, perform experiments that can only be done in zero gravity, and learn how to maintain
+            a spacecraft for long periods of time. Astronauts have been living in the International Space Station
+            since November 2000.</p>
 
-</body>
+            <p th:text="${location}"></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <img class="rounded img-fluid" src="/images/gallery1.jpg" alt=""/>
+        </div>
+        <div class="col-3">
+            <img class="rounded img-fluid" src="/images/gallery2.jpg" alt=""/>
+        </div>
+        <div class="col-3">
+            <img class="rounded img-fluid" src="/images/gallery3.jpg" alt=""/>
+        </div>
+        <div class="col-3">
+            <img class="rounded img-fluid" src="/images/gallery4.jpg" alt=""/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <img class="rounded img-fluid" src="/images/gallery5.jpg" alt=""/>
+        </div>
+        <div class="col-3">
+            <img class="rounded img-fluid" src="/images/gallery6.jpg" alt=""/>
+        </div>
+        <div class="col-3">
+            <img class="rounded img-fluid" src="/images/gallery7.jpg" alt=""/>
+        </div>
+        <div class="col-3">
+            <img class="rounded img-fluid" src="/images/gallery8.jpg" alt=""/>
+        </div>
+    </div>
+
+    <footer th:replace="fragments :: footer"></footer>
+    </body>
+</div>
 </html>

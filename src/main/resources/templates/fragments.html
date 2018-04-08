@@ -3,24 +3,31 @@
 <head th:fragment="head">
     <meta charset="UTF-8"/>
     <title th:text="${title}"> </title>
-    <style>
-        body {
-            margin-left: 50px;
-            background-color: #c0d6e4;
-            color: #130d65;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/css/stylesheet.css"/>
 </head>
 <body>
 
-<nav th:fragment="navigation">
-    <a href="/">Home</a>
-    <a href="/login">Login</a>
-    <a href="/signup">Sign Up</a>
-    <a href="/search">Search</a>
-    <a href="/logout">Logout</a>
+<nav th:fragment="navigation" class="navigation">
+    <p>
+        <a href="/"><button class="btn btn-default">Home</button></a>
+        |
+        <a href="/login"><button class="btn btn-default">Login</button></a>
+        |
+        <a href="/signup"><button class="btn btn-default">Sign Up</button></a>
+        |
+        <a href="/search"><button class="btn btn-default">Search</button></a>
+        |
+        <a href="/logout"><button class="btn btn-default">Logout</button></a>
+    </p>
 </nav>
+
+<footer>
+    <p style="text-align: right">
+        <a href="/contact"><button class="btn btn-default">Contact</button></a>
+    </p>
+</footer>
 
 </body>
 </html>

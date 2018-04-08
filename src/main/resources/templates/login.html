@@ -1,25 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments :: head"></head>
+<div class="container-fluid">
 <body>
+    <header>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="row">
+                <div class="col-3">
+                    <p class="created-by">Created by: Sean Nipper</p>
+                </div>
+                <div class="col-5">
 
-<h1>Login to the International Space Station app</h1>
+                </div>
+                <div class="col-4">
+                    <nav th:replace="fragments :: navigation"></nav>
+                </div>
+            </div>
+        </div>
+    </header>
 
-<nav th:replace="fragments :: navigation"></nav>
+    <div class="row">
+        <div class="col-12">
+            <h1>Login to the International Space Station App!</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <form action="/login" method="post" th:object="${user}">
+                <div style="text-align: right">
+                    <label th:for="username">Username</label>
+                    <input th:field="*{username}" type="text"/>
+                    <span th:errors="*{username}"></span>
+                </div>
+                <div style="text-align: right">
+                    <label th:for="password">Password</label>
+                    <input th:field="*{password}" type="password"/>
+                    <span th:errors="*{password}"></span>
+                </div>
+                <div style="text-align: right">
+                    <button class="btn btn-default" type="submit">Log in</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-6">
 
-<form action="/login" method="post" th:object="${user}">
-    <p>
-        <label th:for="username">Username</label>
-        <input th:field="*{username}"/>
-        <span th:errors="*{username}"></span>
-    </p>
-    <p>
-        <label th:for="password">Password</label>
-        <input th:field="*{password}" type="password"/>
-        <span th:errors="*{password}"></span>
-    </p>
-    <button type="submit">Log in</button>
-</form>
+        </div>
+    </div>
 
-</body>
+    </body>
+</div>
 </html>

@@ -1,49 +1,75 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments :: head"></head>
-<body>
 
-<nav th:replace="fragments :: navigation"></nav>
+<div class="container-fluid">
+    <body>
+    <header>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="row">
+                <div class="col-3">
+                    <p class="created-by">Created by: Sean Nipper</p>
+                </div>
+                <div class="col-5">
 
-<h1>Find out when the ISS will be visible.</h1>
+                </div>
+                <div class="col-4">
+                    <nav th:replace="fragments :: navigation"></nav>
+                </div>
+            </div>
+        </div>
+    </header>
 
-<form action="/search" method="post" th:object="${address}">
-    <p>
-        <label th:for="streetNumber">Street Number</label>
-        <input th:field="*{streetNumber}"/>
-        <span th:errors="*{streetNumber}"></span>
-    </p>
-    <p>
-        <label th:for="street">Street</label>
-        <input th:field="*{street}"/>
-        <span th:errors="*{street}"></span>
-    </p>
-    <p>
-        <label th:for="city">City</label>
-        <input th:field="*{city}"/>
-        <span th:errors="*{city}"></span>
-    </p>
-    <p>
-        <label th:for="state">State</label>
-        <input th:field="*{state}"/>
-        <span th:errors="*{state}"></span>
-    </p>
-    <button type="submit">Search</button>
-</form>
-<br/>
-<br/>
-
-<form action="/search/delete" method="post">
-
-    <div th:each="search : ${searches}">
-        <input type="checkbox" name="Id" th:value="${search.Id}" th:id="${search.Id}"/>
-        <label th:for="${search.Id}" th:text="${search.address}"></label>
-        <p th:text="${search.time}"></p>
-        <br />
+    <div class="row">
+        <div class="col-12">
+            <h1>Find out when the International Space Station will be visible</h1>
+        </div>
     </div>
 
-    <button type="submit">Remove Search</button>
-    <button type="submit" formaction="/search/update">Update Search</button>
-</form>
-</body>
+    <div class="row">
+        <div class="col-6">
+            <form action="/search" method="post" th:object="${address}">
+                <div style="text-align: right">
+                    <label th:for="streetNumber">Street Number</label>
+                    <input th:field="*{streetNumber}"/>
+                    <span th:errors="*{streetNumber}"></span>
+                </div>
+                <div style="text-align: right">
+                    <label th:for="street">Street</label>
+                    <input th:field="*{street}"/>
+                    <span th:errors="*{street}"></span>
+                </div>
+                <div style="text-align: right">
+                    <label th:for="city">City</label>
+                    <input th:field="*{city}"/>
+                    <span th:errors="*{city}"></span>
+                </div>
+                <div style="text-align: right">
+                    <label th:for="state">State</label>
+                    <input th:field="*{state}"/>
+                    <span th:errors="*{state}"></span>
+                </div>
+                <div style="text-align: right">
+                    <button class="btn btn-default" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-6">
+            <form action="/search/delete" method="post">
+
+                <div style="text-align: center" th:each="search : ${searches}">
+                    <input type="checkbox" name="Id" th:value="${search.Id}" th:id="${search.Id}"/>
+                    <label th:for="${search.Id}" th:text="${search.address}"></label>
+                    <p th:text="${search.time}"></p>
+                    <br />
+                </div>
+                <div style="text-align: center">
+                    <button class="btn btn-danger" type="submit">Remove Search</button>
+                    <button class="btn btn-default" type="submit" formaction="/search/update">Update Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </body>
+</div>
 </html>
