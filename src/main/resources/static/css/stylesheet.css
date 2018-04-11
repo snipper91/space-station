@@ -22,6 +22,16 @@ div.jumbotron-fluid {
 
 img {
     margin: 10px;
+    border-style: solid;
+    border-width: 5px;
+    border-color: black;
+}
+
+.gallery-img:hover {
+    border-style: solid;
+    border-width: 5px;
+    border-color: blue;
+
 }
 
 label {
@@ -40,4 +50,25 @@ div.card {
 
 li {
     color: white;
+}
+
+h2 {
+    color: white;
+    font-size: 24px;
+    text-align: center;
+}
+
+.login-form {
+    text-align: right;
+    padding-right: 40px;
+}
+
+.signup-form {
+    text-align: right;
+    padding-right: 40px;
+}
+
+.search-form {
+    text-align: right;
+    padding-right: 40px;
 }

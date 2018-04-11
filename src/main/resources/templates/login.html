@@ -31,17 +31,17 @@
         <div class="col-4">
             <div class="card">
                 <form action="/login" method="post" th:object="${user}">
-                    <div style="text-align: right">
+                    <div class="login-form">
                         <label th:for="username">Username:</label>
                         <input th:field="*{username}" type="text"/>
                         <span th:errors="*{username}"></span>
                     </div>
-                    <div style="text-align: right">
+                    <div class="login-form">
                         <label th:for="password">Password:</label>
                         <input th:field="*{password}" type="password"/>
                         <span th:errors="*{password}"></span>
                     </div>
-                    <div style="text-align: right">
+                    <div class="login-form">
                         <button class="btn btn-default" type="submit">Log in</button>
                     </div>
                 </form>

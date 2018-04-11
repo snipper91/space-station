@@ -30,27 +30,27 @@
         <div class="col-4">
             <div class="card">
                 <form action="/search" method="post" th:object="${address}">
-                    <div style="text-align: right">
+                    <div class="search-form">
                         <label th:for="streetNumber">Street Number:</label>
                         <input th:field="*{streetNumber}"/>
                         <span th:errors="*{streetNumber}"></span>
                     </div>
-                    <div style="text-align: right">
+                    <div class="search-form">
                         <label th:for="street">Street:</label>
                         <input th:field="*{street}"/>
                         <span th:errors="*{street}"></span>
                     </div>
-                    <div style="text-align: right">
+                    <div class="search-form">
                         <label th:for="city">City:</label>
                         <input th:field="*{city}"/>
                         <span th:errors="*{city}"></span>
                     </div>
-                    <div style="text-align: right">
+                    <div class="search-form">
                         <label th:for="state">State:</label>
                         <input th:field="*{state}"/>
                         <span th:errors="*{state}"></span>
                     </div>
-                    <div style="text-align: right">
+                    <div class="search-form">
                         <button class="btn btn-default" type="submit">Search</button>
                     </div>
                 </form>
